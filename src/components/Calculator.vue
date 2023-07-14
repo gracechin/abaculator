@@ -15,16 +15,16 @@
 
 <script>
 import { store } from '@/store/store'
+const sound = require("@/assets/abacus.mp3");
 
 export default {
   name: 'TheCalculator',
   data() {
     return {
       calculatorElements: [7,8,9,'/',4,5,6,'x',1,2,3,'+','C',0,'=','-'],
-      previous: null,
-      current: '0',
       operator: null,
       operatorPressed: false,
+      sound
     }
   },
   methods: {
@@ -34,51 +34,59 @@ export default {
     },
     action(n) { 
       if (!isNaN(n)) {
-        if (this.operatorPressed) {
-          store.commit('resetValue')
-          this.operatorPressed = false
-        }
         store.commit('appendValue', n)
       }
       if (n === 'C') {
         store.commit('resetValue')
+        this.playSound(this.sound)
         this.clear()
       }
       if (['/','x','+','-'].includes(n)) {
-        this.operatorPressed = true
         this.operator = n === "x" ? "*" : n
         store.commit('evaluate', this.operator)
         store.commit('saveValue', this.$store.state.currValue)
+        this.playSound(this.sound)
       }
       if (n === '=') {
         store.commit('evaluate', this.operator)
+        this.playSound(this.sound)
         this.clear()
       }
     },
+    playSound (sound) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.play();
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
-$calculator-outline: #333;
-$calculator-btn-color: #eee;
-$calculator-operator-btn-color: orange;
+$calculator-outline: saddlebrown;
+$calculator-btn-color: white;
+$calculator-operator-btn-color: chocolate;
 
 .calculator {
   display: grid;
   grid-template-columns: repeat(4,1fr);
   grid-auto-rows: minmax(50px,auto);
   font-size: 40px;
+  border: 1px solid $calculator-outline;
+  border-radius: 3px;
+  color: black;
+  background-color: $calculator-outline;
 
   .display {
     grid-column: 1 / 5;
-    background-color: $calculator-outline;
     color: white
   }
   .button {
     background-color: $calculator-btn-color;
     border: 1px solid $calculator-outline;
+    border-radius: 5px;
   }
   .operator {
     background-color: $calculator-operator-btn-color;
