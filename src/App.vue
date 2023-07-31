@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1>Calculate with abacus visualisations</h1> 
+    <h1>Calculator with Abacus Visualisations</h1> 
     <Abacus />
     <Calculator />
-    <footer>Made for fun by <a href="https://gracechin.github.io">Grace Chin</a></footer>
+    <footer>Made for fun by <a href="https://gracechin.github.io">Grace Chin</a>.</footer>
   </div>
 </template>
 
