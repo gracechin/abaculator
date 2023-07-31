@@ -18,7 +18,7 @@ npm run serve
 
 ### To deploy
 
-The project is builts via `npm run build` command.
+The project is hosted using [Github Pages](https://pages.github.com/). A deployment SSH key (a.k.a [deploy key](https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-create-ssh-deploy-key)) was used for authentication.
 
 ## Implementation notes
 
