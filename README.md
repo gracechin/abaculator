@@ -23,4 +23,4 @@ The project is hosted using [Github Pages](https://pages.github.com/). The chang
 ## Implementation notes
 
 - This project uses [Vuex](https://vuex.vuejs.org/) state management pattern and library.
-- Two main components are used: abacus and calculator
+- Two main UI components are used: abacus and calculator.
