@@ -94,6 +94,10 @@ $calculator-operator-btn-color: chocolate;
     background-color: $calculator-btn-color;
     border: 1px solid $calculator-outline;
     border-radius: 5px;
+
+    &:active {
+      background-color: lightgray;
+    }
   }
 
   .operator {

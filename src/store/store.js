@@ -20,16 +20,16 @@ export const store = createStore({
         ? eval(state.savedValue + op + state.currValue)
         : state.currValue;
       state.currValue = calcValue;
+      const digits = calcValue.toString().split("").map(Number);
 
       //Calc abacus arrangement
-      if (calcValue % 1 == 0) {
-        const digits = calcValue.toString().split("").map(Number);
-        state.abacusArr = new Array(9 - digits.length).fill(0).concat(digits);
-        state.disableAbacus = false;
-      } else {
+      if (calcValue % 1 != 0 || digits.length >= 8) {
         state.abacusArr = DEFAULT_ABACUS_ARR;
         state.disableAbacus = true;
+        return
       }
+      state.abacusArr = new Array(9 - digits.length).fill(0).concat(digits);
+      state.disableAbacus = false;
     },
     saveValue(state, value) {
       state.savedValue = value;
@@ -54,11 +54,5 @@ export const store = createStore({
     },
   },
   actions: {},
-  getters: {
-    abacusCurrValue(state) {
-      const digits = state.currValue.toString().split("").map(Number);
-      const abacusArr = new Array(9 - digits.length).fill(0).concat(digits);
-      return abacusArr;
-    },
-  },
+  getters: {},
 });
